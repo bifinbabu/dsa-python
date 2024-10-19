@@ -95,6 +95,7 @@ class LinkedList:
             itr = itr.next
             count += 1
 
+    # Insert after a specific value
     def insert_after_value(self, data_after, data_to_insert):
         if self.head is None:
             return
@@ -111,6 +112,7 @@ class LinkedList:
 
             itr = itr.next
 
+    # Remove a specific value
     def remove_by_value(self, data):
         if self.head is None:
             return
