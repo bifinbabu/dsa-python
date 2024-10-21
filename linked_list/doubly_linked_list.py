@@ -6,7 +6,7 @@ class Node:
 
 
 class DoublyLinkedList:
-    def __init__(self, head):
+    def __init__(self):
         self.head = None
 
     # Insert at beginning
@@ -26,7 +26,7 @@ class DoublyLinkedList:
         while itr.next:
             itr = itr.next
 
-        itr = Node(data, None, itr)
+        itr.next = Node(data, None, itr)
 
     # Insert a list
     def insert_values(self, data_list):
@@ -70,7 +70,7 @@ class DoublyLinkedList:
 
     # Insert at specific index
     def insert_at(self, index, data):
-        if index < 0 or index >= self.get_length():
+        if index < 0 or index > self.get_length():
             raise Exception("Invalid index")
 
         if index == 0:
@@ -81,7 +81,7 @@ class DoublyLinkedList:
         itr = self.head
         while itr:
             if count == index - 1:
-                node = Node(data, itr.next.next, itr)
+                node = Node(data, itr.next, itr)
                 if node.next:
                     node.next.prev = node
                 itr.next = node
@@ -89,3 +89,53 @@ class DoublyLinkedList:
 
             itr = itr.next
             count += 1
+
+    # Get last node in the doubly linked list
+    def get_last_node(self):
+        itr = self.head
+        while itr.next:
+            itr = itr.next
+
+        return itr
+
+    # Print list forward
+    def print_forward(self):
+        if self.head is None:
+            print("List is empty")
+            return
+
+        llstr = ""
+        itr = self.head
+        while itr:
+            llstr += str(itr.data) + "-->"
+            itr = itr.next
+        print(llstr)
+
+    # Print list backward
+    def print_backward(self):
+        if self.head is None:
+            print("List is empty")
+
+        llstr = ""
+        last_node = self.get_last_node()
+        itr = last_node
+
+        while itr:
+            llstr += str(itr.data) + "-->"
+            itr = itr.prev
+        print("Linked list in reverse", llstr)
+
+
+if __name__ == "__main__":
+    ll = DoublyLinkedList()
+    ll.insert_values(["banana", "mango", "grapes", "orange"])
+    ll.print_forward()
+    ll.print_backward()
+    ll.insert_at_end("figs")
+    ll.print_forward()
+    ll.insert_at(0, "jackfruit")
+    ll.print_forward()
+    ll.insert_at(6, "dates")
+    ll.print_forward()
+    ll.insert_at(2, "kiwi")
+    ll.print_forward()

@@ -77,7 +77,7 @@ class LinkedList:
 
     # Insert at specific index
     def insert_at(self, index, data):
-        if index < 0 or index >= self.get_length():
+        if index < 0 or index > self.get_length():
             raise Exception("Invalid index")
 
         if index == 0:
